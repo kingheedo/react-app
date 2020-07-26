@@ -56,6 +56,10 @@ class App extends Component {
     }else if(this.state.mode === 'create'){
       _article = <CreateContent onSubmit={function(_title, _desc){
         //add content to this.state.contents
+        // this.state.contents.push({id:this.max_content_id, title: _title, desc: _desc});
+        this.max_content_id = this.max_content_id+1;
+        var _contents = this.state.contents.concat({id:this.max_content_id, title: _title, desc:_desc})
+        this.setState({contents: _contents});
         console.log(_title, _desc);
       }.bind(this)}></CreateContent>
     }
@@ -75,6 +79,8 @@ class App extends Component {
         });
       }.bind(this)} 
       data={this.state.contents}></TOC>
+
+      
       <Control onChangeMode={function(_mode){
         this.setState({
           mode: _mode
